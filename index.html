@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo-app</title>
-</head>
-<body>
-    <h1>Todo app</h1>
-    <input id="todo-input" type="text">
-    <button>submit</button>
-    <ul id="list">
-        <li>cook food </li>
-        <li>go to gym </li>
-    </ul>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,400;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="font-[Poppins] bg-gradient-to-b from-cyan-500 to-blue-500 h-screen"
+  >
+    <div
+      class="mx-2 md:mx-auto md:w-[500px] bg-white border border-black rounded-lg px-10 py-6 m-auto mt-40 h-[70vh] md:h-[450px] shadow-xl"
+    >
+      <h1 class="text-3xl font-bold">Todo app</h1>
+      <form
+        onsubmit="handleSubmit(event)"
+        class="flex items-center justify-between mt-5 gap-2"
+      >
+        <input
+          id="todo-input"
+          class="px-5 py-2 border border-gray-400 rounded-md flex-1"
+          placeholder="Add Your New Todo"
+          type="text"
+        />
+        <button
+          class="p-4 h-12 w-12 flex justify-center items-center bg-purple-500 text-white text-3xl font-bold rounded-md"
+        >
+          <span class="">+</span>
+        </button>
+      </form>
 
+      <ul id="list" class="mt-4 h-[350px] md:h-[230px] overflow-y-scroll"></ul>
 
-
-
+      <div
+        id="todo-bottom"
+        class="flex flex-col gap-1 md:flex-row justify-between items-center mt-5"
+      >
+        <!-- <p>You have 4 pending tasks</p>
+        <button 
+          class="px-4 py-2  flex justify-center items-center bg-purple-500 text-white rounded-md"
+        >
+        Clear All
+        </button> -->
+      </div>
+    </div>
 
     <script src="index.js"></script>
-    
-</body>
+  </body>
 </html>
