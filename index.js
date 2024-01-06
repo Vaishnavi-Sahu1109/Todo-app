@@ -6,16 +6,19 @@ const todoBottom = document.getElementById("todo-bottom");
 const isEditing = false;
 const editedTodo = "";
 
-function handleSubmit(event) {
-  event.preventDefault();
+let todos = [];
 
-  const text = inputElement.value;
-  if (!text) {
-    return;
-  }
+const localTodos = JSON.parse(localStorage.getItem("todos"));
 
+todos = localTodos || [];
+
+todos?.forEach((element) => {
+  insertTodo(element);
+});
+
+function insertTodo(element) {
   const li = document.createElement("li");
-  li.innerText = text;
+  li.innerText = element;
   li.className =
     "bg-gray-200 px-3 py-2 font-semibold rounded mb-2 flex justify-between items-center";
 
@@ -24,6 +27,13 @@ function handleSubmit(event) {
     "<img src='./delete.png' alt='Delete' class='w-8 h-8' />";
   deleteButton.className = "";
   deleteButton.addEventListener("click", (e) => {
+    const localTodos = JSON.parse(localStorage.getItem("todos"));
+    const filteredTodos = localTodos.filter((ele) => {
+      return ele !== element;
+    });
+
+    localStorage.setItem("todos", JSON.stringify(filteredTodos));
+
     li.remove();
     updateTodoBottom();
   });
@@ -34,6 +44,20 @@ function handleSubmit(event) {
   inputElement.focus();
 
   updateTodoBottom();
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const text = inputElement.value;
+  if (!text) {
+    return;
+  }
+
+  todos.push(text);
+  localStorage.setItem("todos", JSON.stringify(todos));
+
+  insertTodo(text);
 }
 
 function updateTodoBottom() {
@@ -49,6 +73,7 @@ function updateTodoBottom() {
     "px-4 py-2  flex justify-center items-center bg-purple-500 text-white rounded-md";
   clearButton.innerText = "Clear All";
   clearButton.addEventListener("click", () => {
+    localStorage.removeItem("todos");
     list.innerHTML = "";
     todoBottom.classList.add("hidden");
   });
